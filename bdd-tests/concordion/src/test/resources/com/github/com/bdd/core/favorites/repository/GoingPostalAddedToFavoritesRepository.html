@@ -1,0 +1,19 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+    <head>
+        <title>Going Postal added to favorites repository</title>
+    </head>
+
+    <body>
+
+        <h1>Going Postal added to Favorites Repository</h1>
+
+        <p>
+            Given empty Favorites Repository <span concordion:execute="emptyFavoritesRepository()"/><br/>
+            When Going Postal is added to Favorites Repository <span concordion:execute="whenGoingPostalIsAddedToFavoritesRepository()"/><br/>
+            Then favorite book is <span concordion:execute="thenFavoriteBookIsGoingPostal()"/> Going Postal.
+        </p>
+
+    </body>
+
+</html>

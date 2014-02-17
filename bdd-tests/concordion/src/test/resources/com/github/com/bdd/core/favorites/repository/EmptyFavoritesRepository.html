@@ -1,0 +1,19 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+    <head>
+        <title>Favorites Repository</title>
+    </head>
+
+    <body>
+
+        <h1>Empty Favorites Repository</h1>
+
+        <p>
+            Given empty Favorites Repository <span concordion:execute="emptyFavoritesRepository()" /><br/>
+            When there is nothing added to the repository <span concordion:execute="thereIsNothingAddedToTheRepository()" /><br/>
+            Then favorite book is null <span concordion:execute="favoriteBookIsEmpty()" /> null.
+        </p>
+
+    </body>
+
+</html>

@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.altanis</groupId>
+        <artifactId>bdd-tests</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bdd-tests-jdave</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <jdave.version>1.4</jdave.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>panda</id>
+            <name>Laughing Panda</name>
+            <url>http://maven.laughingpanda.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>panda</id>
+            <name>Laughing Panda</name>
+            <url>http://maven.laughingpanda.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.altanis</groupId>
+            <artifactId>bdd-tests-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jdave</groupId>
+            <artifactId>jdave-core</artifactId>
+            <version>${jdave.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jdave</groupId>
+            <artifactId>jdave-junit4</artifactId>
+            <version>${jdave.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>${basedir}/src/java</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <systemProperties>
+                        <property>
+                            <name>jdave.tools.specdox.format</name>
+                            <value>xml txt</value>
+                        </property>
+                        <property>
+                            <name>jdave.tools.specdox.dir</name>
+                            <value>target/jdave</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.jdave</groupId>
+                <artifactId>jdave-report-plugin</artifactId>
+                <version>${jdave.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.2</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>

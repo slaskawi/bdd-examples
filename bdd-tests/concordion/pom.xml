@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.altanis</groupId>
+        <artifactId>bdd-tests</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bdd-tests-concordion</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <concordion.version>1.4.2</concordion.version>
+        <concordion-extensions.version>1.1.0</concordion-extensions.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.altanis</groupId>
+            <artifactId>bdd-tests-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.concordion</groupId>
+            <artifactId>concordion</artifactId>
+            <version>${concordion.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.concordion</groupId>
+            <artifactId>concordion-extensions</artifactId>
+            <version>${concordion-extensions.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <systemProperties>
+                        <property>
+                            <name>concordion.output.dir</name>
+                            <value>target/concordion</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-project-info-reports-plugin</artifactId>
+                            <version>2.2</version>
+                            <configuration>
+                                <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+                                <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>com.github.bassman5</groupId>
+                            <artifactId>maven-concordion-reporting-plugin</artifactId>
+                            <version>1.0.2</version>
+                            <configuration>
+                                <concordionDir>${basedir}/target/concordion</concordionDir>
+                                <!--<concordionIndexFile>com/github/com/bdd/core/favorites/repository/index.html</concordionIndexFile>-->
+                                <concordionIndexFile>
+                                    com/github/com/bdd/core/favorites/repository/FavoritesRepository.html
+                                </concordionIndexFile>
+                            </configuration>
+                        </plugin>
+                    </reportPlugins>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
